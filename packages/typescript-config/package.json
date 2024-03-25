@@ -5,5 +5,15 @@
   "license": "MIT",
   "publishConfig": {
     "access": "public"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.30",
+    "colors": "^1.4.0",
+    "server": "^1.0.0"
+  },
+  "dependencies": {
+    "@apollo/server": "^4.10.2",
+    "graphql": "^16.8.1",
+    "graphql-tag": "^2.12.6"
   }
 }

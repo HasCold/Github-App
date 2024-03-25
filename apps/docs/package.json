@@ -9,7 +9,10 @@
     "lint": "eslint . --max-warnings 0"
   },
   "dependencies": {
+    "@apollo/server": "^4.10.2",
     "@repo/ui": "*",
+    "graphql": "^16.8.1",
+    "graphql-tag": "^2.12.6",
     "next": "^14.1.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
@@ -19,10 +22,12 @@
     "@repo/eslint-config": "*",
     "@repo/typescript-config": "*",
     "@types/eslint": "^8.56.5",
-    "@types/node": "^20.11.24",
+    "@types/node": "^20.11.30",
     "@types/react": "^18.2.61",
     "@types/react-dom": "^18.2.19",
+    "colors": "^1.4.0",
     "eslint": "^8.57.0",
+    "server": "^1.0.0",
     "typescript": "^5.3.3"
   }
 }

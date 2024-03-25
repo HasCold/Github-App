@@ -1,0 +1,52 @@
+------------------------------- BACKEND (server workspace) --------------------------------
+
+Initialize the TurboRepo :- npx create-turbo@latest
+
+Install typescript as a workspace 
+npm i typescript --workspace server -D
+
+npm i tsc-watch --workspace server -D
+
+npm i @types/node --workspaces server -D
+
+To generate the tsconfig.json file :- tsc --init
+
+------------------- Server Package.json ------------------------
+
+In my script package.json file : -
+"dev": "tsc-watch --onSuccess \"node dist/index.js\""   -->> // Means first they watch typescript in compile mode and when the compilation gets Success then run the node-server for index.js file    
+
+"build": "tsc -p ."   
+
+This script is responsible for manually triggering the TypeScript compilation process to generate the JavaScript code from your TypeScript source files. The -p . flag specifies the path to the TypeScript project, and in this case, it's the current directory (.).
+
+Running this script (npm run build) will compile your TypeScript code based on the tsconfig.json configuration in your project and generate the corresponding JavaScript files in the dist directory.
+
+-------------------------------------------------------------------
+
+npm i graphql --workspaces server
+
+npm i @apollo/server --workspaces server
+
+npm i graphql-tag --workspaces server
+
+npm i express --workspace server 
+npm i @types/express --workspace server -D
+
+npm i cors --workspace server 
+npm i @types/cors --workspace server -D 
+
+-----------------------------------------------------------------------------------------------------------------------------------
+
+
+------------------------------- FRONTEND (web workspace) --------------------------------
+
+Tailwind CSS :
+npm install -D tailwindcss postcss autoprefixer --workspace web
+npx tailwindcss init -p
+configure the Settings to tailwindcss.config.ts  ;  refer to this https://tailwindcss.com/docs/guides/nextjs
+
+npm i react-hot-toast react-icons --workspace web
+
+
+-----------------------------------------------------------------------------------------------------------------------------------

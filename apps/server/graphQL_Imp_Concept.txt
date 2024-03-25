@@ -1,0 +1,17 @@
+------------------------ startStandaloneServer() -------------------------
+
+Use startStandaloneServer() when you want Apollo Server to handle the creation and management of the HTTP server for you.
+This method is convenient if you want Apollo Server to handle the entire HTTP server lifecycle, including creation, listening on a port, and shutting down.
+It's particularly useful if you're running Apollo Server in environments where you want to control the server entirely within your application code, without relying on external server configurations.
+This method is more straightforward and abstracts away the details of HTTP server management.
+
+
+-------------------------------- ApolloServerPluginDrainHttpServer({ httpServer }) -----------------------
+
+Use ApolloServerPluginDrainHttpServer() when you already have an existing HTTP server instance that you want Apollo Server to integrate with.
+This plugin allows Apollo Server to attach to an existing HTTP server instance, allowing you to have more control over the HTTP server's creation and configuration.
+It's useful when you have specific requirements for your HTTP server setup, such as custom middleware, SSL configurations, or integration with other frameworks like Express.js.
+This approach gives you flexibility if you need to integrate Apollo Server into an existing Express.js or Koa application, where you already have an HTTP server instance created.
+
+
+In summary, if you want Apollo Server to handle the HTTP server lifecycle for you, including creation and listening, use startStandaloneServer(). If you already have an existing HTTP server instance and want Apollo Server to integrate with it, use ApolloServerPluginDrainHttpServer() along with passing your HTTP server instance. Choose the method that best fits your application's requirements and existing architecture.
