@@ -1,5 +1,5 @@
 import { ApolloServer} from '@apollo/server';
-import { startStandaloneServer } from '@apollo/server/standalone';
+// import { startStandaloneServer } from '@apollo/server/standalone';
 import colors from "colors";
 import gql from 'graphql-tag';
 import http from "http";

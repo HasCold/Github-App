@@ -1,0 +1,4 @@
+Through this API end-point you can get all the data related to the Github Hosting Platform :-
+
+https://api.github.com 
+https://api.github.com/users/HasCold/repos

@@ -1,10 +1,17 @@
-import React from 'react'
+"use client";
+
+import React, { useState } from 'react'
 import Search from '../../components/Search';
 import ProfileInfo from '../../components/profile/ProfileInfo';
 import SortRepos from '../../components/repos/SortRepos';
 import Repos from '../../components/repos/Repos';
 
 const HomePage = () => {
+
+   const [userProfile, setUserProfile] = useState(null);
+   const [repo, setRepo] = useState([]);
+   const [loading, setLoading] = useState(false);
+
   return (
     <div className='m-4'>
       <Search />
