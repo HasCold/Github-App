@@ -2,13 +2,15 @@ import React from 'react'
 import { IconType } from 'react-icons';
 
 interface ProfileCompProps {
-    count: number;
+    count: number | undefined;
     text: string;
     icon: IconType;
 }
 
+type UserInfoFunction = () => string;
+
 interface PersonalUserInfoProps {
-    userInfo: string;
+    userInfo: string | UserInfoFunction | undefined;
     text: string;
 }
 
@@ -24,12 +26,23 @@ const ProfileUserNumber:React.FC<ProfileCompProps> = ({count, text, icon: Icon})
 }
 
 const PersonalUserInfo: React.FC<PersonalUserInfoProps> = ({userInfo, text}) => {
-    return(
+    
+   // Handle the case when userInfo is a function
+   const renderUserInfo = () => {
+    if (typeof userInfo === 'function') {
+        const infoString = userInfo(); // Call the function to get the string
+        return <p>{infoString}</p>; // Return the string wrapped in React fragment
+    } else {
+        return <p>{userInfo}</p>; // Return the userInfo as it is
+    }
+};
+
+  return(
         <>
         <div className='my-2'>
 			<p className='text-gray-600 font-bold text-sm'>{text}</p>
-			<p className=''>{userInfo}</p>
-		</div>
+			  {renderUserInfo()}
+		    </div>
         </>
     )
 }

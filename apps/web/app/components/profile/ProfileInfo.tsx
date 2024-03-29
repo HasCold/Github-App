@@ -5,22 +5,18 @@ import { IoLocationOutline } from 'react-icons/io5';
 import { TfiThought } from 'react-icons/tfi';
 import {PersonalUserInfo, ProfileUserNumber} from './ProfileComp';
 import { RiGitRepositoryCommitsFill, RiGitRepositoryFill, RiUserFollowFill, RiUserFollowLine } from 'react-icons/ri';
+import { UserProfileProps } from '../../types/index';
+import { formatMemberSince } from '../../utils/services';
 
-const ProfileInfo = () => {
-    const userProfile = {
-		avatar_url: "https://ps.w.org/user-avatar-reloaded/assets/icon-256x256.png?rev=2540745",
-		bio: "👨🏻‍💻👨🏻‍💻👨🏻‍💻",
-		email: "johndoe@gmail.com",
-		followers: 100,
-		following: 200,
-		html_url: "https://github.com/burakorkmez",
-		location: "Somewhere, Earth",
-		name: "John Doe",
-		public_gists: 100,
-		public_repos: 100,
-		twitter_username: "johndoe",
-		login: "johndoe",
-	};
+interface ProfileInfoProps {
+	userProfile: UserProfileProps | null;
+}
+
+const ProfileInfo: React.FC<ProfileInfoProps> = ({userProfile}) => {
+
+	const formatTime = (date: string | undefined) => {
+		return formatMemberSince(date);
+	}
 
   return (
     <div className='lg:w-1/3 w-full flex flex-col gap-2 md:sticky md:top-10'>
@@ -37,7 +33,7 @@ const ProfileInfo = () => {
                 {/* View on Github */}
 					<div className='flex gap-2 items-center flex-col'>
 						<a
-							href={userProfile.html_url}
+							href={userProfile?.html_url}
 							target='_blank'
 							rel='noreferrer'
 							className='bg-glass font-medium w-full text-xs p-2 rounded-md cursor-pointer border border-blue-400 flex items-center gap-2'
@@ -48,7 +44,7 @@ const ProfileInfo = () => {
 					</div>
 				</div>
 
-        {/* User Bio */}
+        		{/* User Bio */}
 				{userProfile?.bio ? (
 					<div className='flex items-center gap-2'>
 						<TfiThought />
@@ -56,7 +52,7 @@ const ProfileInfo = () => {
 					</div>
 				) : null}
 
-        {/* Location */}
+        		{/* Location */}
 				{userProfile?.location ? (
 					<div className='flex items-center gap-2'>
 						<IoLocationOutline />
@@ -64,7 +60,7 @@ const ProfileInfo = () => {
 					</div>
 				) : null}
 
-        {/* Twitter Username */}
+        		{/* Twitter Username */}
 				{userProfile?.twitter_username ? (
 					<a
 						href={`https://twitter.com/${userProfile.twitter_username}`}
@@ -78,9 +74,9 @@ const ProfileInfo = () => {
 				) : null}
 
 				{/* Member Since Date */}
-        <PersonalUserInfo  userInfo="21 Sep, 2023" text='Member since'/>
+        		<PersonalUserInfo  userInfo={formatTime(userProfile?.created_at)} text='Member since'/>
 
-        {/* Email Address */}
+        		{/* Email Address */}
 				{userProfile?.email && <PersonalUserInfo  userInfo={userProfile.email} text='Email Address'/>}
 
 				{/* Full Name */}
