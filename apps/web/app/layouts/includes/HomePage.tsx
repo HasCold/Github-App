@@ -9,11 +9,12 @@ import useGetUserProfileAndProps from '../../hooks/useGetUserProfileAndProps';
 import toast from 'react-hot-toast';
 import useGetRepoResponse from '../../hooks/useGetRepoResponse';
 import { UserProfileProps } from '../../types';
+import Spinner from '../../components/Spinner';
 
 const HomePage = () => {
 
   const [userProfile, setUserProfile] = useState<UserProfileProps | null>(null);
-  const [repo, setRepo] = useState([]);
+  const [repos, setRepos] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const [sortType, setSortType] = useState("forks");
@@ -23,10 +24,9 @@ const HomePage = () => {
     try{
       const userProfile = await useGetUserProfileAndProps();
       setUserProfile(userProfile);
-      console.log(userProfile);
 
-      const repos = await useGetRepoResponse(userProfile.repos_url);
-      setRepo(repos);
+      const repo = await useGetRepoResponse(userProfile.repos_url);
+      setRepos(repo);
 
       setLoading(false);
     }catch(error: any){
@@ -45,8 +45,10 @@ const HomePage = () => {
       <Search />
       <SortRepos />
       <div className='flex gap-4 flex-col lg:flex-row justify-center items-start'>
-        <ProfileInfo userProfile={userProfile} />
-        <Repos />
+        {userProfile && !loading && <ProfileInfo userProfile={userProfile} />}
+        
+        {repos.length > 0 && !loading && <Repos repos={repos} />}
+        {loading && <Spinner />}
       </div>
      </div>
   )
