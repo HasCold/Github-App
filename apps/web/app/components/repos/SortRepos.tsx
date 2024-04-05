@@ -1,4 +1,4 @@
-const SortRepos = () => {
+const SortRepos = ({sortType, onSort}) => {
 	return (
 		<div className='mb-2 flex justify-center lg:justify-end'>
 			<button

@@ -3,6 +3,8 @@ import { FaCodeFork } from "react-icons/fa6";
 import Image from "next/image";
 import { RepoType } from '../../types';
 import { formatDate } from "../../utils/services";
+import { PROGRAMMING_LANGUAGES } from "../../utils/constants"; 
+import toast from "react-hot-toast";
 
 type RepoProps = {
 	repo: RepoType
@@ -11,6 +13,15 @@ type RepoProps = {
 const Repo: React.FC<RepoProps> = ({repo}) => {
 
 	const Date = formatDate(repo.created_at);
+
+	const handleCloneClick = async (repo: RepoType) => {
+		try {
+			await navigator.clipboard.writeText(repo.clone_url); // Copy to Clipboard
+			toast.success("Repo URL cloned to clipboard");
+		} catch (error) {
+			toast.error("Failed to clone repo URL to clipboard");
+		}
+	}
 
 	return (
 		<li className='mb-10 ms-7'>
@@ -42,6 +53,7 @@ const Repo: React.FC<RepoProps> = ({repo}) => {
 					<FaCodeFork /> {repo.forks_count}
 				</span>
 				<span
+					onClick={() => handleCloneClick(repo)}
 					className='cursor-pointer bg-green-100 text-green-800 text-xs
 					font-medium px-2.5 py-0.5 rounded-full flex items-center gap-1'
 				>
@@ -55,8 +67,12 @@ const Repo: React.FC<RepoProps> = ({repo}) => {
 			>
 				Released on {Date}
 			</time>
-			<p className='mb-4 text-base font-normal text-gray-500'>Real Time Chat App | MERN && Socket.io && JWT</p>
-			<Image src={"/javascript.svg"} alt='Programming language icon' className='h-8' height={32} width={32}/>
+			<p className='mb-4 text-base font-normal text-gray-500'>
+				{repo.description ? repo.description.slice(0, 500) : "No description provided"}
+			</p>
+			{ PROGRAMMING_LANGUAGES[repo.language ?? ""] ? (
+				<img src={PROGRAMMING_LANGUAGES[repo.language]} alt='Programming language icon' className='h-8' />
+			) : null}
     </li>
 	);
 };

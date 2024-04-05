@@ -37,7 +37,6 @@ export function formatDate(inputDateString: string){
         if(day >= 11 && day <= 13){
             return day + "th";
         }
-
         switch(day % 10){
             case 1: 
             return day + "st";
