@@ -19,7 +19,7 @@ const ProfileInfo: React.FC<ProfileInfoProps> = ({userProfile}) => {
 	}
 
   return (
-    <div className='lg:w-1/3 w-full flex flex-col gap-2 md:sticky md:top-10'>
+    <div className='lg:w-1/3 w-full flex flex-col gap-2 md:top-10'>
         <div className='bg-glass rounded-lg p-4'>
             <div className='flex gap-3 items-center'>
                 {/* User Avatar */}
