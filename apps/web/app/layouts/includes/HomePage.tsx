@@ -22,7 +22,7 @@ const HomePage = () => {
   const [repos, setRepos] = useState<RepoType[]>([]);
   const [loading, setLoading] = useState(false);
 
-  const [sortType, setSortType] = useState("forks");
+  const [sortType, setSortType] = useState("recent");
 
   const getUserProfileAndRepos = useCallback(async (username="HasCold"): Promise<GetUserProfileAndReposReturnType> => {
     setLoading(true);
@@ -32,6 +32,7 @@ const HomePage = () => {
 
       const repo: RepoType[] = await useGetRepoResponse(userProfile.repos_url);
       setRepos(repo);
+      repos.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
       setLoading(false);
 
       return {userProfile, repo}
@@ -54,9 +55,9 @@ const HomePage = () => {
     setUserProfile(null);
 
     const {userProfile, repo} = await getUserProfileAndRepos(username);
-    
     setRepos(repo);
     setUserProfile(userProfile);
+    setSortType("recent");
     setLoading(false);
     
   }
@@ -83,7 +84,7 @@ const HomePage = () => {
       <div className='flex gap-4 flex-col lg:flex-row justify-center items-start'>
         {userProfile && !loading && <ProfileInfo userProfile={userProfile} />}
         
-        {!loading && <Repos repos={repos} />}
+        {!loading && <Repos repos={repos} alwaysFullWidth/>}
         {loading && <Spinner />}
       </div>
      </div>

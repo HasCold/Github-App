@@ -1,3 +1,4 @@
+"use server";
 
 const useExploreRepos = async (language: string) => {
   try {
