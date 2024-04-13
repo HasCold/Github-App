@@ -1,15 +1,17 @@
 
-const useGetUserProfileAndRepos = async (username: string) => {
-  console.log("P", process.env.GITHUB_API_KEY);
-
+const useGetUserProfileAndRepos = async (username: string = "HasCold") => {
   try {
-    const res = await fetch("https://api.github.com/users/" + username, {
+    if(!username) throw new Error("Username is undefined");
+
+    const res = await fetch("/api/userProfileAndRepo", {
+      method: "POST",
       headers: {
-        authorization: `token ${process.env.GITHUB_API_KEY}`
-      }
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({username})
     });
     const userProfile = await res.json();
-      return userProfile;
+      return userProfile.data;
 
     } catch (error: any) {
      console.error(error.message);
