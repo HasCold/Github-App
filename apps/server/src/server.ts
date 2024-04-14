@@ -9,6 +9,9 @@ import { expressMiddleware } from "@apollo/server/express4";
 import { ApolloServerPluginDrainHttpServer } from "@apollo/server/plugin/drainHttpServer";
 import dotenv from "dotenv"
 import profileRoute from "./routes/profile.Route"
+import connectDB from './config/db';
+
+import './lib/passport'
 
 dotenv.config();
 const app = express();
@@ -41,6 +44,7 @@ const server = new ApolloServer({
 
 async function startServer(){
     await server.start();  // Ensure we wait for our server to start
+    await connectDB();
 
     app.use(express.json());  // To ensure that the request body is parsed before it reaches the GraphQL middleware, you should place the express.json() middleware before expressMiddleware(server).
     app.use(cors({

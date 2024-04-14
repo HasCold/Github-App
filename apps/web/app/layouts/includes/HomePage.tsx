@@ -21,8 +21,8 @@ const HomePage = () => {
   const [userProfile, setUserProfile] = useState<UserProfileProps | null>(null);
   const [repos, setRepos] = useState<RepoType[]>([]);
   const [loading, setLoading] = useState(false);
-
   const [sortType, setSortType] = useState("recent");
+
 
   const getUserProfileAndRepos = useCallback(async (username="HasCold"): Promise<GetUserProfileAndReposReturnType> => {
     setLoading(true);
