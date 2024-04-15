@@ -1,9 +1,13 @@
+"use client";
+
 import React from 'react'
 import MainLayout from '../layouts/MainLayout'
 import NextLink from '../components/LinkTag'
 import { FaGithub, FaUnlockAlt } from 'react-icons/fa'
+import {handleLoginWithGithub} from "../lib/function"
 
 const Signup = () => {
+
   return (
     <>
     <MainLayout>
@@ -12,11 +16,12 @@ const Signup = () => {
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
           <h1 className='text-xl font-bold md:text-2xl text-center'>Create Account</h1>
 					
-          <button
+          			<button
 						type='button'
 						className='text-white bg-[#24292F] hover:bg-[#24292F]/90 focus:ring-4
 						focus:ring-[#24292F]/50 font-medium rounded-lg flex gap-2 p-2 items-center w-full 
 						text-center justify-center'
+						onClick={handleLoginWithGithub}
 					>
 						<FaGithub className='w-5 h-5' />
 						Sign up with Github
@@ -32,10 +37,10 @@ const Signup = () => {
 					<p className='text-sm font-light text-gray-500'>
 						Already have an account?{" "}
 						<NextLink 
-            href='/login'
-            className='font-medium text-primary-600 hover:underline text-blue-600'
-            >
-							Login
+            			href='/login'
+            			className='font-medium text-primary-600 hover:underline text-blue-600'
+            			>
+						Login
 						</NextLink>
 					</p>
           </div>

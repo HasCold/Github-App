@@ -1,6 +1,8 @@
 import passport from "passport";
 import dotenv from 'dotenv';
+import { Profile } from "../types";
 var GitHubStrategy = require('passport-github2').Strategy;
+const userModel = require ("../model/user.model");
 
 dotenv.config();
 
@@ -19,11 +21,25 @@ passport.serializeUser(function(user, done) {
 passport.use(new GitHubStrategy({
     clientID: process.env.GITHUB_CLIENT_ID,
     clientSecret: process.env.GITHUB_CLIENT_SECRET,
-    callbackURL: "/"
+    callbackURL: "/api/auth/github/callback"
   },
-  function(accessToken: string, refreshToken: string, profile: string, done: Function) {
-    // asynchronous verification, for effect...
-    console.log("Profile", profile);
+ async function(accessToken: string, refreshToken: string, profile: Profile, done: Function) {
+
+    const user = await userModel.findOne({username: profile.username});
+    if(!user){
+      const newUser = userModel({
+          name: profile.displayName,
+					username: profile.username,
+					profileUrl: profile.profileUrl,
+					avatarUrl: profile.photos[0].value,
+					likedProfiles: [],
+					likedBy: [],
+      });
+      await newUser.save();
+      done(null, newUser);
+    }else{
+      done(null, user);
+    }
   }
 ));
 

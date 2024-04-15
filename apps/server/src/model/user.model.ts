@@ -10,7 +10,7 @@ const userSchema = new mongoose.Schema({
         {
             username: {type: String, required: true},
             avatarUrl: {type: String},
-            likedDate: {type: new Date, default: Date.now}
+            likedDate: {type: Date, default: Date.now}
         }
     ]
 }, {
